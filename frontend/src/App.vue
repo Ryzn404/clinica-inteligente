@@ -14,6 +14,7 @@
 
 <script setup>
 import { useAuth } from './store/auth'
+import { ref, computed} from "vue";
 const auth = useAuth()
 const isAuth = computed(() => !!auth.token)
 function logout(){ auth.logout(); }
