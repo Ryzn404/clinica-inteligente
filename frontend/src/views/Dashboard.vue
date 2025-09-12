@@ -25,7 +25,7 @@
             <td>{{ new Date(a.date).toLocaleString() }}</td>
             <td>
               <span v-if="a.weatherSnapshot">
-                {{ a.weatherSnapshot.weatherMain }} / chuva(3h): {{ a.weatherSnapshot.rainVolume || 0 }}
+                {{ a.weatherSnapshot.weatherMain }} / chuva: {{ a.weatherSnapshot.rainVolume || 0 }}
               </span>
               <span v-else>—</span>
             </td>

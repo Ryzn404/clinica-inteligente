@@ -7,7 +7,7 @@
       <button>Entrar</button>
     </form>
     <p>Ainda não tem conta? <router-link to="/register">Cadastre-se</router-link></p>
-    <p><strong>Demos:</strong> secretaria@clinic.com / 123456 — paciente@clinic.com / 123456</p>
+    <p><strong>Contatos:</strong> secretaria@clinic.com / 123456 — paciente@clinic.com / 123456</p>
   </div>
 </template>
 <script setup>
