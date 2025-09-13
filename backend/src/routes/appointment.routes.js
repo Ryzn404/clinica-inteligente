@@ -6,9 +6,9 @@ const r = Router()
 
 r.use(authRequired)
 
-r.post('/', create)                            // criar agendamento
-r.get('/', role(['secretary']), list)          // listar todos (secretário)
-r.get('/mine', mine)                           // meus agendamentos (paciente)
-r.delete('/:id', role(['secretary']), remove)  // remover (secretário)
+r.post('/', create)                            
+r.get('/', role(['secretary']), list)          
+r.get('/mine', mine)                           
+r.delete('/:id', role(['secretary']), remove)  
 
 export default r

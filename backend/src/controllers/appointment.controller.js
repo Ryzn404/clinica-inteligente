@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const apptSchema = z.object({
   patientId: z.string().min(1),
-  date: z.string().datetime(), // ISO
+  date: z.string().datetime(), 
   reason: z.string().optional(),
   cep: z.string().min(8).max(9).optional()
 })
@@ -22,11 +22,9 @@ async function fetchWeather(city, dateISO) {
   if (!key) return null
   const units = process.env.OWM_UNITS || 'metric'
 
-  // Usaremos a API 5 day / 3 hour forecast como aproximação
   const url = 'https://api.openweathermap.org/data/2.5/forecast'
   const r = await axios.get(url, { params: { q: city, appid: key, units } })
   const list = r.data?.list || []
-  // Encontrar o bloco mais próximo da data/hora
   const target = new Date(dateISO).getTime()
   let best = null, bestDiff = Infinity
   for (const it of list) {
@@ -45,7 +43,6 @@ export const create = async (req, res) => {
     const data = apptSchema.parse(req.body)
     const when = new Date(data.date)
 
-    // Conflito: mesmo horário +/- 30 min para o mesmo paciente
     const windowMs = 30 * 60 * 1000
     const from = new Date(when.getTime() - windowMs)
     const to = new Date(when.getTime() + windowMs)
@@ -57,7 +54,6 @@ export const create = async (req, res) => {
 
     if (conflict) return res.status(409).json({ error: 'Já existe consulta próxima a esse horário' })
 
-    // CEP -> endereço
     let addressSnapshot = null
     let city = null
     if (data.cep) {
@@ -65,7 +61,6 @@ export const create = async (req, res) => {
       city = addressSnapshot?.localidade
     }
 
-    // Clima -> snapshot do horário
     const weatherSnapshot = await fetchWeather(city, data.date)
 
     const appt = await Appointment.create({

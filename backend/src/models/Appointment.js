@@ -4,8 +4,8 @@ const AppointmentSchema = new mongoose.Schema({
   patient: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   date: { type: Date, required: true },
   reason: { type: String },
-  addressSnapshot: { type: Object }, // endereço resolvido via CEP
-  weatherSnapshot: { type: Object }, // resultado de chuva no dia/hora
+  addressSnapshot: { type: Object }, 
+  weatherSnapshot: { type: Object }, 
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
 
